@@ -50,6 +50,7 @@ public class LectureDaoImpl implements LectureDao {
         lecture.setLectureName(resultSet.getString(2));
         lecture.setLecturer(l);
         lecture.setTypeOfWork(t);
+        lecture.setSchedule(resultSet.getString(5));
         lecture.setTask(resultSet.getString(6));
         lecture.setResources(resultSet.getBlob(7));
 
