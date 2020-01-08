@@ -16,17 +16,18 @@ import java.util.List;
 public class LectureDaoImpl implements LectureDao {
 
     private static final String SQL_QUERY_SAVE = "insert into homeworks.lectures(lecture_name, lecturer, type_of_work, schedule, task, resources) values (?,?,?,?,?,?);";
-    private final String SQL_QUERY_GET_ALL = "select * " +
-            "     from homeworks.lectures lectures " +
-            "              join homeworks.lecturer lecturer on lectures.lecturer = lecturer.id " +
-            "              join homeworks.type_of_work type_of_w on lectures.type_of_work = type_of_w.id " +
-            "              join homeworks.department depart on lecturer.department= depart.id;";
-    private final String SQL_QUERY_GET_LECTURE = "select * " +
-            "     from homeworks.lectures lectures " +
-            "              join homeworks.lecturer lecturer on lectures.lecturer = lecturer.id " +
-            "              join homeworks.type_of_work type_of_w on lectures.type_of_work = type_of_w.id " +
-            "              join homeworks.department depart on lecturer.department= depart.id " +
-            "     where lectures.id = ? ;";
+    private static final String SQL_QUERY_UPDATE = "update homeworks.lectures set lecture_name = ?, lecturer = ?, type_of_work = ?, schedule = ?, task = ?, resources = ? where id = ?;";
+    private static final String SQL_QUERY_GET_ALL = "select * " +
+                                                    "from homeworks.lectures lectures " +
+                                                    "         join homeworks.lecturer lecturer on lectures.lecturer = lecturer.id " +
+                                                    "         join homeworks.type_of_work type_of_w on lectures.type_of_work = type_of_w.id " +
+                                                    "         join homeworks.department depart on lecturer.department= depart.id;";
+    private static final String SQL_QUERY_GET_LECTURE = "select * " +
+                                                        "from homeworks.lectures lectures " +
+                                                        "         join homeworks.lecturer lecturer on lectures.lecturer = lecturer.id " +
+                                                        "         join homeworks.type_of_work type_of_w on lectures.type_of_work = type_of_w.id " +
+                                                        "         join homeworks.department depart on lecturer.department= depart.id " +
+                                                        "where lectures.id = ? ;";
 
     private RowMapper<Lecture> rowMapper = (resultSet, i) -> {
         Lecture lecture = new Lecture();
@@ -101,8 +102,21 @@ public class LectureDaoImpl implements LectureDao {
     }
 
     @Override
-    public int update(Lecture obj) {
-        return 0;
+    public int update(Lecture lecture) {
+        try {
+            cnt = new InitialContext();
+            dataSource = (DataSource) cnt.lookup("java:/comp/env/jdbc/postgres");
+            jdbcTemplate = new JdbcTemplate(dataSource);
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+        return jdbcTemplate.update(SQL_QUERY_UPDATE, lecture.getLectureName(),
+                                                    lecture.getLecturer().getId(),
+                                                    lecture.getTypeOfWork().getId(),
+                                                    lecture.getSchedule(),
+                                                    lecture.getTask(),
+                                                    lecture.getResources(),
+                                                    lecture.getId());
     }
 
     @Override

@@ -17,9 +17,9 @@ import java.util.List;
 @WebServlet("/lectures/editing")
 public class LecturesEditingController extends HttpServlet {
 
-    LectureDao lectureDao = new LectureDaoImpl();
-    LecturerDao lecturerDao = new LecturerDaoImpl();
-    TypeOfWorkDao typeOfWorkDao = new TypeOfWorkDaoImpl();
+    private LectureDao lectureDao = new LectureDaoImpl();
+    private LecturerDao lecturerDao = new LecturerDaoImpl();
+    private TypeOfWorkDao typeOfWorkDao = new TypeOfWorkDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,12 +36,22 @@ public class LecturesEditingController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
+        Lecture lecture = new Lecture();
+        Lecturer lecturer = new Lecturer();
+        TypeOfWork typeOfWork = new TypeOfWork();
 
-        while (parameterNames.hasMoreElements()){
-            String s = parameterNames.nextElement();
-            System.out.println(request.getParameter(s));
-        }
+        typeOfWork.setId(Long.parseLong(request.getParameter("type_of_work")));
+
+        lecturer.setId(Long.parseLong(request.getParameter("lecturers")));
+
+        lecture.setId(Long.parseLong(request.getParameter("id")));
+        lecture.setLectureName(request.getParameter("lecture_name"));
+        lecture.setLecturer(lecturer);
+        lecture.setTypeOfWork(typeOfWork);
+        lecture.setSchedule(request.getParameter("schedule"));
+        lecture.setTask(request.getParameter("task"));
+
+        lectureDao.update(lecture);
 
         response.sendRedirect("/lectures");
     }
