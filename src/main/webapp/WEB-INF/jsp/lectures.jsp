@@ -39,7 +39,7 @@
                         </td>
                         <td><c:out value="${lecture.typeOfWork.typeWork}" /></td>
                         <td><c:out value="${lecture.schedule}" /></td>
-                        <td><c:out value="${lecture.task}" /></td>
+                        <td><c:out escapeXml="false" value="${lecture.task}" /></td>
                         <td><c:out value="${lecture.resources}" /></td>
                         <td width="10">
                             <a href="/lectures/editing?id=${lecture.id}" >Редактировать</a>
