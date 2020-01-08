@@ -1,3 +1,5 @@
 software-engineering.iml
 .idea
 target
+/test.txt
+/src/main/java/Main.java

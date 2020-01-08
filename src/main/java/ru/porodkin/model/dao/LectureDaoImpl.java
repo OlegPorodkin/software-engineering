@@ -21,7 +21,8 @@ public class LectureDaoImpl implements LectureDao {
                                                     "from homeworks.lectures lectures " +
                                                     "         join homeworks.lecturer lecturer on lectures.lecturer = lecturer.id " +
                                                     "         join homeworks.type_of_work type_of_w on lectures.type_of_work = type_of_w.id " +
-                                                    "         join homeworks.department depart on lecturer.department= depart.id;";
+                                                    "         join homeworks.department depart on lecturer.department= depart.id" +
+                                                    " order by 2;";
     private static final String SQL_QUERY_GET_LECTURE = "select * " +
                                                         "from homeworks.lectures lectures " +
                                                         "         join homeworks.lecturer lecturer on lectures.lecturer = lecturer.id " +

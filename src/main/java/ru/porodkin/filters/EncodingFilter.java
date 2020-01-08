@@ -1,4 +1,4 @@
-package ru.porodkin.util;
+package ru.porodkin.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

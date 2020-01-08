@@ -20,7 +20,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Преподаватель</td>
+                    <td>Преподаватель<a href="${pageContext.request.contextPath}/lecturer/add"> add</a></td>
                     <td>
                         <select name="lecturers">
                             <c:forEach items="${lecturers}" var="lecturer">
@@ -52,17 +52,13 @@
                 <tr>
                     <td>Расписание</td>
                     <td>
-                    <textarea name="schedule">
-                        <c:out value="${lecture.schedule}"/>
-                    </textarea>
+                    <textarea name="schedule"><c:out value="${lecture.schedule}"/></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Задание</td>
                     <td>
-                    <textarea name="task">
-                        <c:out value="${lecture.task}"/>
-                    </textarea>
+                    <textarea name="task"><c:out value="${lecture.task}"/></textarea>
                     </td>
                 </tr>
                 <tr>
