@@ -24,7 +24,12 @@
                     <td>
                         <select name="lecturers">
                             <c:forEach items="${lecturers}" var="lecturer">
-                                <option value="${lecturer.fullName}">${lecturer.fullName}</option>
+                                <c:if test="${lecturer.id == lecture.lecturer.id}">
+                                    <option selected value="${lecturer.id}">${lecturer.fullName}</option>
+                                </c:if>
+                                <c:if test="${lecturer.id != lecture.lecturer.id}">
+                                    <option value="${lecturer.id}">${lecturer.fullName}</option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </td>
@@ -34,7 +39,12 @@
                     <td>
                         <select name="type_of_work">
                             <c:forEach items="${type_of_work}" var="typeOfWork">
-                                <option value="<c:out value="${typeOfWork.typeWork}"/>"><c:out value="${typeOfWork.typeWork}"/></option>
+                                <c:if test="${typeOfWork.id == lecture.typeOfWork.id}">
+                                    <option selected value="${typeOfWork.id}"><c:out value="${typeOfWork.typeWork}"/></option>
+                                </c:if>
+                                <c:if test="${typeOfWork.id != lecture.typeOfWork.id}">
+                                    <option value="${typeOfWork.id}"><c:out value="${typeOfWork.typeWork}"/></option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </td>

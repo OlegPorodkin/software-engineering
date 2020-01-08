@@ -56,7 +56,8 @@ public class Lecture {
     }
 
     public String getTask() {
-        return task;
+        String replace = task.replace("\n", "<br>");
+        return replace;
     }
 
     public void setTask(String task) {
